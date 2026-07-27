@@ -92,7 +92,6 @@ def resume_maker_prompt():
   return prompt
 
 resume_maker_prompt()
-;
 
   #===========GENERATE RESUME=============
   prompt = """ You are a helpful AI assistant
