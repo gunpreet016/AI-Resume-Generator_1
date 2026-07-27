@@ -106,11 +106,11 @@ ALWAYS USE DIFFERENT STYLING and designs"""
 final = prompt + resumemaker_prompt()
 
 user_details = """user details: given below:
-name: sarneet,
+name: Gunpreet,
 age:19,
 profession :graphic designer,
 education : 2012-2025 jmj sr. sec school 2026-present iitm,
-gmail: sarneeetkaur06@gmail.com,
+gmail: gunpreet016@gmail.com,
 contact: 9687814949,
 SKILLS: CANVA PRO,
 Layout and Grid Design,
