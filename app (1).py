@@ -93,8 +93,8 @@ def resume_maker_prompt():
 
 resume_maker_prompt()
 
-  #===========GENERATE RESUME=============
-  prompt = """ You are a helpful AI assistant
+#===========GENERATE RESUME=============
+prompt = """ You are a helpful AI assistant
     with job resume maker, uyour task is to give
     HTML format resume, with proper designing using recent CSS and JS
     code, with professional design Format.
