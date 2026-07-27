@@ -95,11 +95,11 @@ resume_maker_prompt()
 
   #===========GENERATE RESUME=============
   prompt = """ You are a helpful AI assistant
-with job resume maker, uyour task is to give
-HTML format resume, with proper designing using recent CSS and JS
-code, with professional design Format.
-User will upload date and return HTML format resume
-always use different color or sytlling make it  more colourfull and attractive"""
+    with job resume maker, uyour task is to give
+    HTML format resume, with proper designing using recent CSS and JS
+    code, with professional design Format.
+    User will upload date and return HTML format resume
+    always use different color or sytlling make it  more colourfull and attractive"""
 
 final_prompt = prompt + resume_maker_prompt()
 
