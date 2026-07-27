@@ -1,0 +1,131 @@
+import streamlit as st
+# streamlit: we based app making
+# lite python framework
+
+st.title("AI Resume Maker")
+st.markdown("""# User can create or download AI created Resume  based on high ATS score""")
+
+#=======================AGENT CODE======================
+# step:2
+import IPython as ip
+import os
+import time
+import langchain
+from langchain.agents import create_agent
+from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
+import pytesseract as pyt
+from tavily import TavilyClient
+from langchain.messages import SystemMessage, HumanMessage
+import numpy as np
+import streamlit as st
+from langchain_community.document_loaders import PyMuPDFLoader
+
+#===============API KEY LOAD================
+GOOGLE_API_KEY = st.sidebar.text_input("GOOGLE_API_KEY", type="password")
+GROQ_API_KEY = st.sidebar.text_input("GROQ_API_KEY", type="password")
+TAVILY_API_KEY = st.sidebar.text_input("TAVILY_API_KEY", type="password")
+
+#==================MODEL BUILDING=============
+
+model = ChatGoogleGenerativeAI(
+    model = 'gemini-3.5-flash-lite',
+    google_api_key = GOOGLE_API_KEY
+)
+def search_news_Jobs(query):
+  """This function helps to search
+  recents news or recents jobs
+  realted to giev search query
+  suppose user write python Developer jobs
+  It should return trending news and jobs link"""
+  client = TavilyClient(api_key = TAVILY_API_KEY)
+
+  return client.search(query)
+
+model
+
+
+
+# agent creation
+from langchain.agents import create_agent
+
+agent = create_agent(
+    model = model,
+    tools = [search_news_Jobs]
+)
+agent
+
+
+#===========PROMPT GENERATOR=========
+def prompt_generator(agent):
+  """This function helps to give detailed prompt
+  followed by chain of thoughts and
+  persona based prompting, main task is to give
+  detailed propmpt to build resume for
+  students or experienced person
+  Based on their given personal information.
+  """
+
+  prompt =""" You are a senior HR resume analyzer,
+  main task is to give
+  detailed propmpt to build resume for
+  students or experienced person
+  Based on their given personal information.
+  System Instruction I want model to generate resume
+  in HTML format, include that in prompt"""
+
+  response = agent.invoke(prompt)
+  file_name = 'prompt.py'
+  with open(file_name,'w') as f:
+    f.write(response.content[-1]['text'])
+  return "Prompt file generated successfully, agent can read it"
+
+
+
+# TOOL 2:
+def resume_maker_prompt():
+  """This function just gives
+  updated prompt to model"""
+
+  with open('prompt.py', 'r') as f:
+    prompt = f.read()
+  return prompt
+
+  #===========GENERATE RESUME=============
+  prompt = """ You are a helpful AI assistant
+with job resume maker, uyour task is to give
+HTML format resume, with proper designing using recent CSS and JS
+code, with professional design Format.
+User will upload date and return HTML format resume
+always use different color or sytlling make it  more colourfull and attractive"""
+
+final_prompt = prompt + resume_maker_prompt()
+
+user_details = """User details: given below:
+Name: Gunpreet kaur,
+email id: gunpreetakaur016@gmail.com
+phone no.: 9315995109
+proffesional skills:Motivated BCA student with a strong interest in Artificial Intelligence, Cloud Computing, and Full-Stack Web Development. Skilled in Python, HTML, CSS, JavaScript, PHP, SQL, and AWS Cloud fundamentals.
+ Passionate about building innovative applications, learning modern technologies, and solving real-world problems through technology. Seeking internship and project opportunities to enhance technical expertise.
+ Academic Projects
+AI Resume Generator
+Developed an AI-powered Resume Generator using Python.
+Generated professional HTML resumes automatically.
+Used prompt engineering to improve resume quality.
+  """
+
+query = final_prompt + user_details
+
+if st.button("Generate Resume"):
+  with st.spinner("Running Agent.....")
+
+    response = agent.invoke({'messages':[{'role':'user','content':query}]})
+    code = response['messages'][-1].content[-1]['text']
+
+    st.markdown(code)
+
+    
+
+
+
+
