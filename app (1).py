@@ -145,3 +145,10 @@ if st.button('generate resume'):
 
    
     st.html(code , width="stretch" , unsafe_allow_javascript=True)
+      st.divider()
+      response = agent.invoke({'messages':[{'role':'user','content':'job_prompt}]}]
+
+      job_code = response['messages'][-1].content[-1]['text']
+      st.html(job_code, width = "stretch", unsafe_allow_javascript=True)
+
+    
