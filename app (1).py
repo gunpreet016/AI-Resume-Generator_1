@@ -31,8 +31,14 @@ GOOGLE_API_KEY=st.sidebar.text_input("GOOGLE_API_KEY",type = "password")
 GROQ_API_KEY=st.sidebar.text_input("GROQ_API_KEY",type = "password")
 TAVILY_API_KEY=st.sidebar.text_input("TAVILY_API_KEY",type = "password")
 
+if not (GOOGLE_API_KEY) and not(GROQ_API_KEY) and not (TAVILY_API_KEY):
+    st.sidebar.warning("PASS API KEY")
+    st.stop()
+else:
+    st.success("API KEYS LOADED")
 
 
+#==============MODEL BUILDING==================
 model = ChatGoogleGenerativeAI(
     model = 'gemini-3.5-flash-lite',
     google_api_key = GOOGLE_API_KEY
@@ -95,7 +101,34 @@ def resumemaker_prompt():
     prompt = f.read()
   return prompt
 resumemaker_prompt()
-#===============resume generator==================
+
+#===============UPLOAD IMAGE======================
+uploaded_file = st.sidebar.file_uploader(
+    "choose an image file",
+    type=["jpg", "jpeg", "png", "webp"]
+)
+if uploaded_file is not None:
+    try:
+        image = Image.open(uploaded_file)
+
+        st.sidebar.image(image, caption="Uploaded Image", use_container_width=True)
+
+        if image.mode in ("RGBA", "P"):
+            image = image.convert("RGB")
+        base_name = os.path.splitext(uploaded_file.name)[0]
+        save_path = f"{base_name}.jpg"
+
+        # 3. Save the image to the current working directory
+        image.save(save_path, "JPEG")
+        st.sidebar.success(f"🎉 Image successfully saved as'{save_Path}'!")
+
+    except Exception as e:
+        st.error(f" Eror processing image:{e}")
+        
+
+
+
+#===============GENERATE RESUME==================
 prompt = """ you are a helpful ai assistant
 with job resume maker, your task is to give
 HTML format resume,with proper designing using recent CSS  and JS
@@ -105,7 +138,15 @@ ALWAYS USE DIFFERENT STYLING and designs"""
 
 final = prompt + resumemaker_prompt()
 
+user_info = st.text_input("Enter your information")
+
 user_details = """user details: given below:
+Reumse info: {user_info}
+Photo: {uploaded_file}
+Photo present in current directory with name as
+uploaded_file, and once resume generated give
+download button in same html code.
+Dafault if not given: Give Python Developer REsume"
 name: Gunpreet,
 age:19,
 profession :graphic designer,
