@@ -107,21 +107,11 @@ IMPORTANT: wherever the profile photo goes in the resume, output exactly this ta
 <img src="PROFILE_IMAGE_PLACEHOLDER" style="width:100px;height:100px;border-radius:50%;">
 do not draw or generate any other image tag or placeholder circle yourself
 Use glassmorphism cards with backdrop blur.
-
 Add animated hover effects.
-
 Use subtle gradients.
-
 Use SVG section dividers.
-
-Create a premium UI similar to Apple, Stripe and Notion.
-
 Do not make the resume look like a Microsoft Word document.
-
 Use CSS Grid.
-
-Maintain lots of white space.
-
 Create a designer-level resume"""
 final_prompt=prompt+resume()
 USER_INFO=st.text_area("ENTER YOUR INFORMATION")
