@@ -106,44 +106,6 @@ prompt="""you are a helpful ai assistant  with a job resume maker , your task is
 IMPORTANT: wherever the profile photo goes in the resume, output exactly this tag and nothing else:
 <img src="PROFILE_IMAGE_PLACEHOLDER" style="width:100px;height:100px;border-radius:50%;">
 do not draw or generate any other image tag or placeholder circle yourself
-Use glassmorphism cards with backdrop blur.
-Add animated hover effects.
-Use subtle gradients.
-Use SVG section dividers.
-Do not make the resume look like a Microsoft Word document.
-Use CSS Grid.
-Create a designer-level resume
-IMPORTANT LAYOUT INSTRUCTIONS:
-
-The resume must have a two-column layout.
-
-LEFT SIDEBAR:
-- Profile Photo
-- Name
-- Job Title
-- Contact Information
-- Core Skills (8–10 skill tags)
-- Technical Skills
-- Languages
-- Certifications (if available)
-- Interests
-- Soft Skills
-
-Do NOT leave empty space below Core Skills.
-If the user has less information, automatically create professional sections such as Languages, Interests and Soft Skills to fill the sidebar.
-RIGHT SIDE:
-- Professional Summary
-- Education
-- Projects
-- Experience (if available)
-- Achievements
-- Certifications
-- Internship
-- Extra Curricular Activities
-
-The sidebar height should match the main content.
-Avoid large blank spaces.
-Cards should expand automatically based on content.
 The resume must always look visually balanced."""
 final_prompt=prompt+resume()
 USER_INFO=st.text_area("ENTER YOUR INFORMATION")
