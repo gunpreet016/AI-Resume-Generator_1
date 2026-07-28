@@ -109,6 +109,7 @@ uploaded_file = st.sidebar.file_uploader(
 )
 if uploaded_file is not None:
     try:
+        from PIL import Image
         image = Image.open(uploaded_file)
 
         st.sidebar.image(image, caption="Uploaded Image", use_container_width=True)
