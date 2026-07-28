@@ -108,7 +108,7 @@ IMPORTANT: wherever the profile photo goes in the resume, output exactly this ta
 do not draw or generate any other image tag or placeholder circle yourself """
 final_prompt=prompt+resume()
 USER_INFO=st.text_area("ENTER YOUR INFORMATION")
-user_details=f"""user details:given beow :Name: Gunpreet Kaur, age: 19,gmail:gunpreetkaur016@gmail.com, Profession: AWS student, education: kamal public school, CLG: iitm bca 2nd year, """
+user_details=f"""user details:given beow :Name: Gunpreet Kaur,📩:gunpreetkaur016@gmail.com,📱9315995109,📍Delhi|India, Area of interest: AWS student,Web Development education:BCA 2nd Year, College: IITM """
 query = final_prompt+user_details
 
 import base64
