@@ -14,6 +14,8 @@ SCORE""")
 import os
 import time
 import langchain
+import base64
+from io import BytesIO
 from langchain.agents import create_agent
 from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -121,7 +123,7 @@ if uploaded_file is not None:
 
         # 3. Save the image to the current working directory
         image.save(save_path, "JPEG")
-        st.sidebar.success(f"🎉 Image successfully saved as'{save_Path}'!")
+        st.sidebar.success(f"🎉 Image successfully saved as'{save_path}'!")
 
     except Exception as e:
         st.error(f" Eror processing image:{e}")
